@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Interests | Ayesha Manaloto</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --primary: #0f0f23;
+      --secondary: #ff6b6b;
+      --accent: #4ecdc4;
+      --purple: #a8e6cf;
+      --orange: #ffd93d;
+      --pink: #ff8a80;
+      --blue: #81d4fa;
+      --white: #ffffff;
+      --light-gray: #f8f9fa;
+      --dark-gray: #2c3e50;
+      --font-primary: 'Space Grotesk', sans-serif;
+      --font-secondary: 'Playfair Display', serif;
+    }
+
+    body {
+      font-family: var(--font-primary);
+      background: var(--primary);
+      color: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: linear-gradient(45deg, #0f0f23, #1a1a3a, #2d2d5f);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+    }
+
+    .bg-animation::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        radial-gradient(circle at 20% 80%, rgba(255, 107, 107, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(78, 205, 196, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 217, 61, 0.1) 0%, transparent 50%);
+      animation: float 20s ease-in-out infinite;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      33% { transform: translateY(-20px) rotate(1deg); }
+      66% { transform: translateY(10px) rotate(-1deg); }
+    }
+
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(15, 15, 35, 0.9);
+      backdrop-filter: blur(20px);
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-family: var(--font-secondary);
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--white);
+      text-decoration: none;
+      position: relative;
+    }
+
+    .logo::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--secondary), var(--accent));
+      transition: width 0.3s ease;
+    }
+
+    .logo:hover::after {
+      width: 100%;
+    }
+
+    .nav {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .nav a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.7rem 1.5rem;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--secondary), var(--accent));
+      transition: left 0.3s ease;
+      z-index: -1;
+    }
+
+    .nav a:hover::before,
+    .nav a.active::before {
+      left: 0;
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    .hero {
+      margin-top: 80px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      padding: 2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-title {
+      font-family: var(--font-secondary);
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, var(--secondary), var(--accent), var(--orange));
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientText 8s ease infinite;
+    }
+
+    @keyframes gradientText {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .hero-subtitle {
+      font-size: 1.3rem;
+      font-weight: 300;
+      opacity: 0.8;
+      margin-bottom: 3rem;
+      line-height: 1.7;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--accent);
+      font-size: 2rem;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+      40% { transform: translateX(-50%) translateY(-10px); }
+      60% { transform: translateX(-50%) translateY(-5px); }
+    }
+
+    .interests-section {
+      padding: 6rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .interests-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .interest-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 3rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+      cursor: pointer;
+    }
+
+    .interest-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.1));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .interest-card:hover::before {
+      opacity: 1;
+    }
+
+    .interest-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    }
+
+    .interest-card.photography { background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(255, 107, 107, 0.05)); border-color: var(--secondary);}
+    .interest-card.cooking { background: linear-gradient(135deg, rgba(255, 217, 61, 0.1), rgba(255, 217, 61, 0.05)); border-color: var(--orange);}
+    .interest-card.gaming { background: linear-gradient(135deg, rgba(78, 205, 196, 0.1), rgba(78, 205, 196, 0.05)); border-color: var(--accent);}
+    .interest-card.travel { background: linear-gradient(135deg, rgba(129, 212, 250, 0.1), rgba(129, 212, 250, 0.05)); border-color: var(--blue);}
+    .interest-card.music { background: linear-gradient(135deg, rgba(255, 138, 128, 0.1), rgba(255, 138, 128, 0.05)); border-color: var(--pink);}
+    .interest-card.fitness { background: linear-gradient(135deg, rgba(168, 230, 207, 0.1), rgba(168, 230, 207, 0.05)); border-color: var(--purple);}
+
+    .interest-icon {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      display: block;
+      filter: drop-shadow(0 0 20px currentColor);
+      animation: iconFloat 6s ease-in-out infinite;
+    }
+
+    @keyframes iconFloat {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(5deg); }
+    }
+
+    .interest-title { font-family: var(--font-secondary); font-size: 2rem; font-weight: 600; margin-bottom: 1rem; color: var(--white);}
+    .interest-description { font-size: 1rem; line-height: 1.7; opacity: 0.8; margin-bottom: 2rem;}
+    .interest-tags { display: flex; flex-wrap: wrap; gap: 0.5rem;}
+    .tag { background: rgba(255, 255, 255, 0.1); color: var(--white); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: 500; border: 1px solid rgba(255, 255, 255, 0.2); transition: all 0.3s ease;}
+    .tag:hover { background: rgba(255, 255, 255, 0.2); transform: scale(1.05); }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .interests-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;}
+      .interest-card { padding: 2rem; }
+    }
+
+    @media (max-width: 768px) {
+      .header-content { padding: 1rem;}
+      .nav { gap: 0.5rem;}
+      .nav a { padding: 0.5rem 1rem; font-size: 0.8rem;}
+      .hero-title { font-size: 3rem;}
+      .hero-subtitle { font-size: 1.1rem;}
+      .interests-section { padding: 4rem 1rem;}
+      .interests-grid { grid-template-columns: 1fr; gap: 1rem;}
+      .interest-card { padding: 1.5rem;}
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-animation"></div>
+
+  <header class="header">
+    <div class="header-content">
+      <a href="index.html" class="logo">Ayesha Manaloto</a>
+      <nav class="nav">
+        <a href="index.html">Index</a>
+        <a href="interests.html" class="active">Interests</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="fun-facts.html">Fun Facts</a>
+        <a href="skills.html">Skills</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">My Passions</h1>
+      <p class="hero-subtitle">Discover the things that fuel my creativity, inspire my adventures, and bring joy to my everyday life.</p>
+    </div>
+    <div class="scroll-indicator">↓</div>
+  </section>
+
+  <main>
+    <section class="interests-section">
+      <div class="interests-grid">
+        <div class="interest-card photography">
+          <span class="interest-icon">📸</span>
+          <h3 class="interest-title">Photography</h3>
+          <p class="interest-description">I like taking photos of everyday moments, whether it’s friends, school events, or random things that catch my eye.</p>
+          <div class="interest-tags">
+            <span class="tag">Portrait</span>
+            <span class="tag">Landscape</span>
+            <span class="tag">Street</span>
+            <span class="tag">Travel</span>
+          </div>
+        </div>
+
+        <div class="interest-card cooking">
+          <span class="interest-icon">👨‍🍳</span>
+          <h3 class="interest-title">Culinary Arts</h3>
+          <p class="interest-description">I may not be a great cook, but I enjoy trying out snacks, simple recipes, and sharing food moments with my sisters.</p>
+          <div class="interest-tags">
+            <span class="tag">Simple</span>
+            <span class="tag">Asian</span>
+            <span class="tag">Easy</span>
+            <span class="tag">Fun</span>
+          </div>
+        </div>
+
+        <div class="interest-card gaming">
+          <span class="interest-icon">🎮</span>
+          <h3 class="interest-title">Gaming</h3>
+          <p class="interest-description">Gaming is one of my favorite ways to relax and have fun. I enjoy exploring different worlds, playing with friends, and discovering new stories along the way.</p>
+          <div class="interest-tags">
+            <span class="tag">Roblox</span>
+            <span class="tag">Mobile Legends</span>
+            <span class="tag">Free Online Games</span>
+            <span class="tag">VR</span>
+          </div>
+        </div>
+
+        <div class="interest-card travel">
+          <span class="interest-icon">✈️</span>
+          <h3 class="interest-title">Travel</h3>
+          <p class="interest-description">Discovering new cultures, meeting incredible people, and collecting experiences that shape my worldview. Every journey teaches me something new about life.</p>
+          <div class="interest-tags">
+            <span class="tag">Backpacking</span>
+            <span class="tag">Cultural</span>
+            <span class="tag">Adventure</span>
+            <span class="tag">Travel</span>
+          </div>
+        </div>
+
+        <div class="interest-card music">
+          <span class="interest-icon">🎵</span>
+          <h3 class="interest-title">Music</h3>
+          <p class="interest-description">From discovering underground artists to attending live concerts, music is the soundtrack to my life. I love how it connects people across all boundaries.</p>
+          <div class="interest-tags">
+            <span class="tag">Playlist</span>
+            <span class="tag">Spotify</span>
+            <span class="tag">Concerts</span>
+            <span class="tag">Life</span>
+          </div>
+        </div>
+
+        <div class="interest-card fitness">
+          <span class="interest-icon">💪</span>
+          <h3 class="interest-title">Fitness</h3>
+          <p class="interest-description">I try to stay active in simple ways, whether it’s school activities, walking around, or just moving to shake off stress from studying.</p>
+          <div class="interest-tags">
+            <span class="tag">PE Class</span>
+            <span class="tag">Yoga</span>
+            <span class="tag">Jogging</span>
+            <span class="tag">Mindfulness</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>
